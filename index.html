@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Save the Date</title>
+
+  <!-- Polices : Cormorant Garamond (display) + Jost (corps) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Canvas pour les particules animées -->
+  <canvas id="particles"></canvas>
+
+  <!-- ============ INTRO ANIMÉE : ENVELOPPE ============ -->
+  <div class="intro" id="intro">
+    <!-- pétales flottants de l'intro -->
+    <div class="petals" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <p class="intro__kicker">Vous êtes invités</p>
+
+    <!-- Enveloppe (clic = ouverture) -->
+    <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Ouvrir l'invitation">
+      <div class="envelope__back"></div>
+      <div class="envelope__card">
+        <span class="envelope__names" id="envNames"></span>
+        <span class="envelope__line"></span>
+        <span class="envelope__date" id="envDate"></span>
+      </div>
+      <div class="envelope__front"></div>
+      <div class="envelope__flap"></div>
+      <div class="envelope__seal" id="envSeal"></div>
+    </div>
+
+    <p class="intro__hint">Touchez l'enveloppe pour ouvrir</p>
+  </div>
+
+  <!-- ====================== HERO ====================== -->
+  <header class="hero">
+    <div class="hero__inner">
+      <p class="hero__kicker">Nous nous marions</p>
+
+      <h1 class="hero__names">
+        <span id="bride" class="name"></span>
+        <span class="amp">&amp;</span>
+        <span id="groom" class="name"></span>
+      </h1>
+
+      <div class="hero__divider"><span></span></div>
+
+      <p class="hero__date" id="dateLabel"></p>
+      <p class="hero__place" id="placeLabel"></p>
+    </div>
+
+    <div class="scroll-hint">
+      <span>défiler</span>
+      <div class="scroll-line"></div>
+    </div>
+  </header>
+
+  <!-- ================== COMPTE À REBOURS ================== -->
+  <section class="countdown reveal">
+    <h2 class="section-title">Plus que</h2>
+    <div class="countdown__grid" id="countdown">
+      <div class="cd"><span class="cd__num" data-unit="days">00</span><span class="cd__lbl">Jours</span></div>
+      <div class="cd"><span class="cd__num" data-unit="hours">00</span><span class="cd__lbl">Heures</span></div>
+      <div class="cd"><span class="cd__num" data-unit="minutes">00</span><span class="cd__lbl">Minutes</span></div>
+      <div class="cd"><span class="cd__num" data-unit="seconds">00</span><span class="cd__lbl">Secondes</span></div>
+    </div>
+  </section>
+
+  <!-- ================== LIEU / CARTE ================== -->
+  <section class="venue reveal">
+    <h2 class="section-title">Le Lieu</h2>
+    <p class="venue__place" id="venuePlace"></p>
+    <div class="map-frame">
+      <iframe
+        id="map"
+        title="Carte du lieu de réception"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <!-- ================== PIED DE PAGE ================== -->
+  <footer class="footer reveal">
+    <div class="footer__mark" id="footerInitials"></div>
+    <p class="footer__text">Avec amour — Save the Date</p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
