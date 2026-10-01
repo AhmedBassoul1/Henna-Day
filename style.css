@@ -1,5 +1,5 @@
 /* ============================================================
-   SOIRÉE DE HENNÉ — Feuille de style
+   SOIRÉE DE HENNÉ , Feuille de style
    Palette : vert olive / sauge + or
    ============================================================ */
 
@@ -20,11 +20,11 @@
   --f-body:    "Jost", system-ui, sans-serif;
   --f-arabic:  "Amiri", serif;
 
-  /* Police des prénoms — alternatives : "Parisienne" (plus formelle),
+  /* Police des prénoms , alternatives : "Parisienne" (plus formelle),
      "Great Vibes" (très calligraphique), "Cormorant Garamond" (sobre) */
   --f-names:   "Dancing Script", "Parisienne", cursive;
 
-  /* Courbes d'accélération — clé de la fluidité */
+  /* Courbes d'accélération , clé de la fluidité */
   --ease-out:  cubic-bezier(.16, 1, .3, 1);     /* expo.out  */
   --ease-soft: cubic-bezier(.33, 1, .68, 1);    /* cubic.out */
   --ease-flap: cubic-bezier(.62, .02, .22, 1);  /* rabat : départ lourd, fin douce */
@@ -117,7 +117,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 /* ============================================================
-   1. INTRO — ENVELOPPE
+   1. INTRO , ENVELOPPE
    ============================================================ */
 
 .intro {
@@ -167,7 +167,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 /* --- Enveloppe --- */
-/* Enveloppe de flottement — sépare l'animation idle des transformations d'état */
+/* Enveloppe de flottement , sépare l'animation idle des transformations d'état */
 .envelope-wrap {
   transform-style: preserve-3d;
   animation:
@@ -253,7 +253,7 @@ img, svg { display: block; max-width: 100%; }
 .envelope__edges .faint,
 .envelope__flap-edges .faint { stroke-opacity: .25; }
 
-/* rabat — deux faces : extérieur olive, doublure crème */
+/* rabat , deux faces : extérieur olive, doublure crème */
 .envelope__flap {
   position: absolute;
   top: 0;
@@ -419,7 +419,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 /* ============================================================
-   État ouvert — chorégraphie
+   État ouvert , chorégraphie
    0.00s  pression + le sceau se décolle (rebond)
    0.18s  le sceau s'envole en tournant
    0.40s  le rabat bascule (1,25 s)

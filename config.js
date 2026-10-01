@@ -1,12 +1,12 @@
 // ============================================
-//  CONFIGURATION — Modifiez ces valeurs
+//  CONFIGURATION , Modifiez ces valeurs
 // ============================================
 
 // ---- Les mariés ----
 const brideName = "Safae";
 const groomName = "Moulay Ahmed";
 
-// Monogramme / signature (pied de page + PDF) — indépendant des prénoms affichés
+// Monogramme / signature (pied de page + PDF) , indépendant des prénoms affichés
 // Laisser "" pour générer automatiquement les initiales.
 const monogram = "S & A";
 
@@ -14,19 +14,19 @@ const monogram = "S & A";
 const eventTitle = "Henna Day"; // Titre doré de la carte
 const eventSubtitle = "Soirée de Henné";
 
-const weddingDate = "2026-10-17T16:00:00"; // Format ISO — sert au compte à rebours
+const weddingDate = "2026-10-17T16:00:00"; // Format ISO , sert au compte à rebours
 const weddingDateLabel = "17 Octobre 2026"; // Date affichée
 const eventTimeLabel = "16H00";
 const weddingLocation = "gzenaya, Tanger";
 
 const basmala = "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ";
 const invitationNote =
-  "Votre présence illuminera notre soirée — nous serions honorés de partager ce moment avec vous.";
+  "Votre présence illuminera notre soirée, nous serions honorés de partager ce moment avec vous.";
 
 // ---- Ressources (dossier Data/) ----
 const dataFolder = "Data";
 
-// Illustration du couple — photo-transparent.png = photo.png détourée (fond retiré)
+// Illustration du couple , photo-transparent.png = photo.png détourée (fond retiré)
 const coupleImage = `${dataFolder}/photo-transparent.png`;
 
 // Musique lancée à l'ouverture de l'enveloppe ("" pour désactiver le son)

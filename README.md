@@ -1,6 +1,6 @@
-# Henna Day — Invitation Numérique
+# Henna Day , Invitation Numérique
 
-Carte d'invitation animée pour une **soirée de henné**, entièrement configurable via un seul fichier. Aucune dépendance, aucun build — du HTML/CSS/JS pur, prêt à être hébergé en une minute.
+Carte d'invitation animée pour une **soirée de henné**, entièrement configurable via un seul fichier. Aucune dépendance, aucun build , du HTML/CSS/JS pur, prêt à être hébergé en une minute.
 
 ---
 
@@ -13,7 +13,7 @@ Carte d'invitation animée pour une **soirée de henné**, entièrement configur
 - Compte à rebours jusqu'à la soirée
 - Carte Google Maps optionnelle
 - Version PDF A5 prête à imprimer
-- 100 % responsive — optimisé mobile
+- 100 % responsive , optimisé mobile
 - Respecte `prefers-reduced-motion`
 
 ---
@@ -23,7 +23,7 @@ Carte d'invitation animée pour une **soirée de henné**, entièrement configur
 ```bash
 git clone https://github.com/AhmedBassoul1/Henna-Day.git
 cd Henna-Day
-# Ouvrir index.html dans un navigateur — aucun serveur requis
+# Ouvrir index.html dans un navigateur , aucun serveur requis
 ```
 
 ---
@@ -41,7 +41,7 @@ const monogram  = "S & A";            // signature du pied de page ("" → initi
 // L'événement
 const eventTitle     = "Henna Day";
 const eventSubtitle  = "Soirée de Henné";
-const weddingDate    = "2026-10-17T16:00:00";  // ISO — alimente le compte à rebours
+const weddingDate    = "2026-10-17T16:00:00";  // ISO , alimente le compte à rebours
 const weddingDateLabel = "17 Octobre 2026";
 const eventTimeLabel = "16H00";
 const weddingLocation = "gzenaya, Tanger";
@@ -55,7 +55,7 @@ const musicVolume = 0.55;                        // volume final, 0 → 1
 const musicFadeIn = 2500;                        // fondu d'entrée, en ms
 
 // Optionnel
-const mapUrl = "";  // URL Google Maps embed — "" pour masquer la section
+const mapUrl = "";  // URL Google Maps embed , "" pour masquer la section
 ```
 
 Déposez vos propres fichiers dans `Data/` et ajustez les chemins ci-dessus. Pour la photo, un PNG détouré (fond transparent) donne le meilleur rendu dans le médaillon.
@@ -86,7 +86,7 @@ Henna-Day/
 
 ## Hébergement
 
-Le site est statique — déposez les fichiers sur n'importe quel hébergeur :
+Le site est statique , déposez les fichiers sur n'importe quel hébergeur :
 
 - **GitHub Pages** : activez Pages sur la branche `main`
 - **Vercel / Netlify** : importez le dépôt, aucune commande de build
@@ -102,11 +102,11 @@ Le site est statique — déposez les fichiers sur n'importe quel hébergeur :
 | Style | CSS3 custom properties, animations, `clamp()` |
 | Logique | Vanilla JS (ES2020), pas de framework |
 | Audio | `<audio>` natif, fondu d'entrée piloté en rAF |
-| Polices | Google Fonts — Cormorant Garamond, Dancing Script, Great Vibes, Amiri |
-| PDF | `Invitation-Henna-Day.pdf` — A5 vectoriel, polices embarquées |
+| Polices | Google Fonts , Cormorant Garamond, Dancing Script, Great Vibes, Amiri |
+| PDF | `Invitation-Henna-Day.pdf` , A5 vectoriel, polices embarquées |
 
 ---
 
 ## Licence
 
-Usage personnel — invitation privée pour Safae & Moulay Ahmed · Octobre 2026.
+Usage personnel , invitation privée pour Safae & Moulay Ahmed · Octobre 2026.

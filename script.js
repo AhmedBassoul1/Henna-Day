@@ -1,5 +1,5 @@
 /* ============================================================
-   SOIRÉE DE HENNÉ — Logique & animations
+   SOIRÉE DE HENNÉ , Logique & animations
    Données : config.js
    ============================================================ */
 
@@ -52,8 +52,8 @@ for (const [sel, value] of Object.entries(text)) {
   if (el) el.textContent = value;
 }
 
-document.title = `${brideName} & ${groomName} — ${eventSubtitle}`;
-$("#ogTitle")?.setAttribute("content", `${brideName} & ${groomName} — ${eventSubtitle}`);
+document.title = `${brideName} & ${groomName} , ${eventSubtitle}`;
+$("#ogTitle")?.setAttribute("content", `${brideName} & ${groomName} , ${eventSubtitle}`);
 $("#ogDesc")?.setAttribute("content", `${weddingDateLabel} · ${eventTimeLabel} · ${weddingLocation}`);
 
 // Illustration du couple
@@ -68,7 +68,7 @@ if (typeof mapUrl === "string" && mapUrl.trim()) {
 }
 
 /* ============================================================
-   2. MUSIQUE — démarre à l'ouverture de l'enveloppe
+   2. MUSIQUE , démarre à l'ouverture de l'enveloppe
    ============================================================ */
 
 const audio = $("#music");
@@ -172,7 +172,7 @@ document.addEventListener("visibilitychange", () => {
 );
 
 /* ============================================================
-   3. INTRO — OUVERTURE DE L'ENVELOPPE
+   3. INTRO , OUVERTURE DE L'ENVELOPPE
    ============================================================ */
 
 const intro    = $("#intro");
