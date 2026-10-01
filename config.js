@@ -2,11 +2,25 @@
 //  CONFIGURATION — Modifiez ces valeurs
 // ============================================
 
-const brideName = "SAFAE";
-const groomName = "AHMED";
-const weddingDate = "2026-09-12T17:00:00"; // Format ISO (compte à rebours)
-const mapUrl = "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d865.2673478185608!2d-5.003605381065814!3d34.06933026515869!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sbelkhiyat%2C%20fes!5e1!3m2!1sen!2sma!4v1780517918013!5m2!1sen!2sma";
+const brideName = "Safae";
+const groomName = "Ahmed";
+const weddingDate = "2026-10-17T16:00:00"; // Format ISO (compte à rebours)
 
 // Texte affiché de la date (lisible par l'humain)
-const weddingDateLabel = "12 Septembre 2026";
-const weddingLocation = "Belkhayat, Fès";
+const weddingDateLabel = "17 Octobre 2026";
+const weddingLocation = "gzenaya, Tanger";
+
+// ---- Soirée de henné ----
+const eventTitle = "Henna Day"; // Titre doré de la carte
+
+// Illustration du couple (chemin relatif à index.html)
+// photo-transparent.png = photo.png détourée (fond gris retiré)
+const coupleImage = "photo/photo-transparent.png";
+const eventSubtitle = "Soirée de Henné";
+const eventTimeLabel = "16H00";
+const basmala = "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ";
+const invitationNote =
+  "Votre présence illuminera notre soirée — nous serions honorés de partager ce moment avec vous.";
+
+// Carte Google Maps (laisser "" pour masquer la section)
+const mapUrl = "";

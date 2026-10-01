@@ -2,24 +2,27 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Save the Date</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#4A5D4E" />
+  <title>Soirée de Henné</title>
 
-  <!-- Polices : Cormorant Garamond (display) + Jost (corps) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" id="ogTitle" content="Soirée de Henné" />
+  <meta property="og:description" id="ogDesc" content="Vous êtes invités" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Great+Vibes&family=Jost:wght@300;400;500&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Canvas pour les particules animées -->
-  <canvas id="particles"></canvas>
+  <!-- Particules dorées -->
+  <canvas id="particles" aria-hidden="true"></canvas>
 
-  <!-- ============ INTRO ANIMÉE : ENVELOPPE ============ -->
+  <!-- ====================== INTRO : ENVELOPPE ====================== -->
   <div class="intro" id="intro">
-    <!-- pétales flottants de l'intro -->
     <div class="petals" aria-hidden="true">
       <span></span><span></span><span></span><span></span><span></span>
       <span></span><span></span><span></span><span></span><span></span>
@@ -27,49 +30,127 @@
 
     <p class="intro__kicker">Vous êtes invités</p>
 
-    <!-- Enveloppe (clic = ouverture) -->
     <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Ouvrir l'invitation">
-      <div class="envelope__back"></div>
+      <!-- Carte qui sort de l'enveloppe -->
       <div class="envelope__card">
-        <span class="envelope__names" id="envNames"></span>
-        <span class="envelope__line"></span>
-        <span class="envelope__date" id="envDate"></span>
+        <span class="envelope__card-names" id="envCardNames"></span>
+        <span class="envelope__card-line"></span>
+        <span class="envelope__card-date" id="envCardDate"></span>
       </div>
-      <div class="envelope__front"></div>
-      <div class="envelope__flap"></div>
-      <div class="envelope__seal" id="envSeal"></div>
+
+      <!-- Poche avant -->
+      <div class="envelope__front">
+        <svg class="envelope__edges" viewBox="0 0 310 200" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 0 L155 104 L310 0" />
+          <path d="M0 200 L155 108 L310 200" class="faint" />
+        </svg>
+      </div>
+
+      <!-- Rabat 3D -->
+      <div class="envelope__flap">
+        <div class="envelope__flap-face"></div>
+        <svg class="envelope__flap-edges" viewBox="0 0 310 112" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 0 L155 112 L310 0" />
+          <path d="M12 0 L155 100 L298 0" class="faint" />
+        </svg>
+      </div>
+
+      <!-- Noms sur l'enveloppe -->
+      <span class="envelope__names" id="envNames"></span>
+
+      <!-- Sceau de cire doré -->
+      <div class="envelope__seal" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+          <defs>
+            <radialGradient id="sealGrad" cx="35%" cy="30%" r="78%">
+              <stop offset="0%"   stop-color="#F0E2B6" />
+              <stop offset="52%"  stop-color="#C8A95C" />
+              <stop offset="100%" stop-color="#9C7A2A" />
+            </radialGradient>
+          </defs>
+          <path class="seal__wax" fill="url(#sealGrad)"
+            d="M50 4c7 0 10 5 16 6s12-2 17 3 1 11 4 16 9 8 9 15-7 10-9 16 1 12-4 17-11 1-17 3-9 6-16 6-10-5-16-6-12 2-17-3-1-11-4-17-9-9-9-16 7-10 9-15-1-11 4-16 11-2 17-3S43 4 50 4z"/>
+          <circle cx="50" cy="50" r="31" class="seal__ring" />
+          <circle cx="50" cy="50" r="27" class="seal__ring seal__ring--in" />
+          <g class="seal__leaf">
+            <path d="M50 30v40" />
+            <path d="M50 40c-7-1-11-5-12-11 7 0 11 4 12 11z" />
+            <path d="M50 40c7-1 11-5 12-11-7 0-11 4-12 11z" />
+            <path d="M50 53c-8-1-13-6-14-13 8 0 13 5 14 13z" />
+            <path d="M50 53c8-1 13-6 14-13-8 0-13 5-14 13z" />
+            <path d="M50 66c-6-1-10-5-11-10 6 0 10 4 11 10z" />
+            <path d="M50 66c6-1 10-5 11-10-6 0-10 4-11 10z" />
+          </g>
+        </svg>
+      </div>
     </div>
 
     <p class="intro__hint">Touchez l'enveloppe pour ouvrir</p>
   </div>
 
-  <!-- ====================== HERO ====================== -->
+  <!-- ====================== CARTE D'INVITATION ====================== -->
   <header class="hero">
-    <div class="hero__inner">
-      <p class="hero__kicker">Nous nous marions</p>
+    <article class="card" id="card">
+      <span class="card__frame"></span>
+      <span class="card__frame card__frame--in"></span>
 
-      <h1 class="hero__names">
-        <span id="bride" class="name"></span>
-        <span class="amp">&amp;</span>
-        <span id="groom" class="name"></span>
-      </h1>
+      <!-- Coins floraux -->
+      <svg class="corner corner--tl" viewBox="0 0 60 60" aria-hidden="true"><use href="#cornerArt"/></svg>
+      <svg class="corner corner--tr" viewBox="0 0 60 60" aria-hidden="true"><use href="#cornerArt"/></svg>
+      <svg class="corner corner--br" viewBox="0 0 60 60" aria-hidden="true"><use href="#cornerArt"/></svg>
+      <svg class="corner corner--bl" viewBox="0 0 60 60" aria-hidden="true"><use href="#cornerArt"/></svg>
 
-      <div class="hero__divider"><span></span></div>
+      <div class="card__inner">
+        <p class="card__basmala r" dir="rtl" lang="ar" id="basmala"></p>
 
-      <p class="hero__date" id="dateLabel"></p>
-      <p class="hero__place" id="placeLabel"></p>
-    </div>
+        <div class="divider r" aria-hidden="true">
+          <svg viewBox="0 0 220 20"><use href="#dividerArt"/></svg>
+        </div>
 
-    <div class="scroll-hint">
+        <h1 class="card__title r" id="eventTitle"></h1>
+
+        <!-- Illustration du couple -->
+        <figure class="card__art r">
+          <div class="card__art-ring" aria-hidden="true"></div>
+          <img id="coupleImg" src="" alt="Illustration du couple en tenue traditionnelle" loading="eager" decoding="async" />
+        </figure>
+
+        <!-- Noms -->
+        <h2 class="card__names r">
+          <span id="bride" class="name"></span>
+          <span class="amp">&amp;</span>
+          <span id="groom" class="name"></span>
+        </h2>
+
+        <p class="card__subtitle r" id="eventSubtitle"></p>
+
+        <div class="divider r" aria-hidden="true">
+          <svg viewBox="0 0 220 20"><use href="#dividerArt"/></svg>
+        </div>
+
+        <!-- Infos pratiques -->
+        <div class="infos r">
+          <div class="info"><span class="info__lbl">Date</span><span class="info__val" id="dateLabel"></span></div>
+          <span class="info__sep"></span>
+          <div class="info"><span class="info__lbl">Heure</span><span class="info__val" id="timeLabel"></span></div>
+          <span class="info__sep"></span>
+          <div class="info"><span class="info__lbl">Lieu</span><span class="info__val" id="placeLabel"></span></div>
+        </div>
+
+        <p class="card__note r" id="invitationNote"></p>
+      </div>
+    </article>
+
+    <div class="scroll-hint" id="scrollHint">
       <span>défiler</span>
       <div class="scroll-line"></div>
     </div>
   </header>
 
-  <!-- ================== COMPTE À REBOURS ================== -->
+  <!-- ====================== COMPTE À REBOURS ====================== -->
   <section class="countdown reveal">
     <h2 class="section-title">Plus que</h2>
-    <div class="countdown__grid" id="countdown">
+    <div class="countdown__grid">
       <div class="cd"><span class="cd__num" data-unit="days">00</span><span class="cd__lbl">Jours</span></div>
       <div class="cd"><span class="cd__num" data-unit="hours">00</span><span class="cd__lbl">Heures</span></div>
       <div class="cd"><span class="cd__num" data-unit="minutes">00</span><span class="cd__lbl">Minutes</span></div>
@@ -77,25 +158,38 @@
     </div>
   </section>
 
-  <!-- ================== LIEU / CARTE ================== -->
-  <section class="venue reveal">
+  <!-- ====================== LIEU ====================== -->
+  <section class="venue reveal" id="venueSection">
     <h2 class="section-title">Le Lieu</h2>
     <p class="venue__place" id="venuePlace"></p>
-    <div class="map-frame">
-      <iframe
-        id="map"
-        title="Carte du lieu de réception"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        allowfullscreen></iframe>
+    <div class="map-frame" id="mapFrame" hidden>
+      <iframe id="map" title="Carte du lieu de réception" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
     </div>
   </section>
 
-  <!-- ================== PIED DE PAGE ================== -->
+  <!-- ====================== PIED DE PAGE ====================== -->
   <footer class="footer reveal">
     <div class="footer__mark" id="footerInitials"></div>
-    <p class="footer__text">Avec amour — Save the Date</p>
+    <p class="footer__text">Avec amour — Soirée de Henné</p>
   </footer>
+
+  <!-- Symboles SVG réutilisables -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <g id="dividerArt" fill="none" stroke="#C8A95C" stroke-width="1.1" stroke-linecap="round">
+      <path d="M4 10h70" /><path d="M146 10h70" />
+      <path d="M110 3c-5 3-8 5-8 7s3 4 8 7c5-3 8-5 8-7s-3-4-8-7z" />
+      <path d="M86 10c6-5 12-5 16 0-4 5-10 5-16 0z" />
+      <path d="M134 10c-6-5-12-5-16 0 4 5 10 5 16 0z" />
+      <circle cx="110" cy="10" r="1.6" fill="#C8A95C" stroke="none" />
+    </g>
+    <g id="cornerArt" fill="none" stroke="#C8A95C" stroke-opacity=".6" stroke-linecap="round">
+      <path d="M6 30c0-13 11-24 24-24" />
+      <path d="M12 30c0-10 8-18 18-18" />
+      <path d="M14 20c6 1 10 5 11 11-6-1-10-5-11-11z" />
+      <path d="M24 12c1 6 5 10 11 11-1-6-5-10-11-11z" />
+    </g>
+  </svg>
 
   <script src="config.js"></script>
   <script src="script.js"></script>
