@@ -88,16 +88,43 @@ function revealCard() {
   );
 }
 
+// Gerbe d'étincelles dorées au moment où le sceau se décolle
+function burstSparkles(count = 16) {
+  const host = $("#sparkles");
+  if (!host || reduceMotion) return;
+
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < count; i++) {
+    const a = (Math.PI * 2 * i) / count + Math.random() * 0.4;
+    const d = 46 + Math.random() * 62;
+    const s = document.createElement("i");
+    s.style.setProperty("--sx", `${Math.cos(a) * d}px`);
+    s.style.setProperty("--sy", `${Math.sin(a) * d - 26}px`);
+    s.style.animationDelay = `${Math.random() * 0.18}s`;
+    s.style.transform = `scale(${0.55 + Math.random() * 0.8})`;
+    frag.appendChild(s);
+  }
+  host.appendChild(frag);
+  setTimeout(() => (host.textContent = ""), 1600);
+}
+
 function openEnvelope() {
   if (introDone) return;
   introDone = true;
 
-  intro.classList.add("is-opening");
-  envelope.classList.add("is-open");
+  // 1. retour tactile : l'enveloppe s'enfonce légèrement
+  envelope.classList.add("is-pressed");
 
-  // La carte commence à apparaître pendant que l'enveloppe s'efface → fondu enchaîné
-  const cardDelay = reduceMotion ? 0 : 1750;
-  const hideDelay = reduceMotion ? 120 : 2050;
+  setTimeout(() => {
+    envelope.classList.remove("is-pressed");
+    intro.classList.add("is-opening");
+    envelope.classList.add("is-open");
+    setTimeout(burstSparkles, reduceMotion ? 0 : 150);
+  }, reduceMotion ? 0 : 130);
+
+  // La carte apparaît pendant que l'enveloppe s'efface → fondu enchaîné
+  const cardDelay = reduceMotion ? 0 : 1950;
+  const hideDelay = reduceMotion ? 120 : 2400;
 
   setTimeout(revealCard, cardDelay);
   setTimeout(() => {
@@ -113,6 +140,18 @@ envelope.addEventListener("keydown", (e) => {
     openEnvelope();
   }
 });
+
+// Pression maintenue (souris / tactile)
+["pointerdown"].forEach((ev) =>
+  envelope.addEventListener(ev, () => {
+    if (!introDone) envelope.classList.add("is-pressed");
+  })
+);
+["pointerup", "pointercancel", "pointerleave"].forEach((ev) =>
+  envelope.addEventListener(ev, () => {
+    if (!introDone) envelope.classList.remove("is-pressed");
+  })
+);
 
 /* ============================================================
    3. COMPTE À REBOURS
