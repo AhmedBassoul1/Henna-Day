@@ -3,7 +3,7 @@
 // ============================================
 
 const brideName = "Safae";
-const groomName = "Ahmed";
+const groomName = "Moulay Ahmed";
 const weddingDate = "2026-10-17T16:00:00"; // Format ISO (compte à rebours)
 
 // Texte affiché de la date (lisible par l'humain)
