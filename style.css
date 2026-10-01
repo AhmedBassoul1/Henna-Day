@@ -68,6 +68,54 @@ img, svg { display: block; max-width: 100%; }
   pointer-events: none;
 }
 
+/* ---------- Bouton son ---------- */
+.sound-toggle {
+  position: fixed;
+  top: max(14px, env(safe-area-inset-top));
+  right: max(14px, env(safe-area-inset-right));
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid rgba(200, 169, 92, .5);
+  border-radius: 50%;
+  background: rgba(255, 253, 248, .75);
+  backdrop-filter: blur(6px);
+  color: var(--olive);
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(.8);
+  animation: soundIn .7s var(--ease-out) .3s forwards;
+  transition: transform .4s var(--ease-out), border-color .4s ease, background .4s ease;
+}
+.sound-toggle:hover { transform: scale(1.08); border-color: var(--gold); }
+.sound-toggle:active { transform: scale(.94); }
+.sound-toggle[hidden] { display: none; }
+
+.sound-toggle svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.sound-toggle .spk { fill: currentColor; stroke-width: 1.2; }
+.sound-toggle .waves { transition: opacity .25s ease; }
+.sound-toggle .cross { opacity: 0; transition: opacity .25s ease; }
+
+/* état « muet » */
+.sound-toggle[aria-pressed="false"] { color: var(--sage); }
+.sound-toggle[aria-pressed="false"] .waves { opacity: 0; }
+.sound-toggle[aria-pressed="false"] .cross { opacity: 1; }
+
+@keyframes soundIn {
+  to { opacity: 1; transform: scale(1); }
+}
+
 /* ============================================================
    1. INTRO — ENVELOPPE
    ============================================================ */

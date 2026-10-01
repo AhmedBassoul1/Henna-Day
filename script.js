@@ -68,7 +68,111 @@ if (typeof mapUrl === "string" && mapUrl.trim()) {
 }
 
 /* ============================================================
-   2. INTRO — OUVERTURE DE L'ENVELOPPE
+   2. MUSIQUE — démarre à l'ouverture de l'enveloppe
+   ============================================================ */
+
+const audio = $("#music");
+const soundBtn = $("#soundToggle");
+const hasMusic = typeof musicFile === "string" && musicFile.trim();
+
+const VOLUME = typeof musicVolume === "number" ? musicVolume : 0.55;
+const FADE = typeof musicFadeIn === "number" ? musicFadeIn : 2500;
+
+if (hasMusic) audio.src = musicFile;
+
+let fadeRaf = null;
+// Intention de l'invité : true tant qu'il n'a pas coupé le son lui-même.
+// Distinct de `audio.paused`, qui vaut aussi true lors d'une pause automatique.
+let musicWanted = false;
+
+/** Fait glisser le volume jusqu'à `to`. */
+function fadeTo(to, duration = FADE) {
+  cancelAnimationFrame(fadeRaf);
+  const from = audio.volume;
+  const t0 = performance.now();
+
+  (function step(now) {
+    const k = Math.min((now - t0) / duration, 1);
+    audio.volume = from + (to - from) * (1 - Math.pow(1 - k, 3)); // ease-out
+    if (k < 1) fadeRaf = requestAnimationFrame(step);
+  })(t0);
+}
+
+/**
+ * Lance la musique. Appelé depuis le clic sur l'enveloppe : le navigateur
+ * considère ce geste comme une autorisation de lecture audio.
+ */
+function startMusic() {
+  if (!hasMusic) return;
+
+  audio.volume = 0;
+  const p = audio.play();
+
+  if (p && typeof p.then === "function") {
+    p.then(() => {
+      musicWanted = true;
+      soundBtn.hidden = false;
+      setSoundButton(true);
+      fadeTo(VOLUME);
+    }).catch(() => {
+      // Lecture refusée (onglet silencieux, économie de données…) :
+      // on affiche le bouton pour que l'invité puisse l'activer lui-même.
+      musicWanted = false;
+      soundBtn.hidden = false;
+      setSoundButton(false);
+    });
+  }
+}
+
+function setSoundButton(on) {
+  soundBtn.setAttribute("aria-pressed", String(on));
+  soundBtn.setAttribute("aria-label", on ? "Couper la musique" : "Activer la musique");
+  soundBtn.title = on ? "Couper la musique" : "Activer la musique";
+}
+
+function toggleSound() {
+  musicWanted = !musicWanted;
+  setSoundButton(musicWanted);
+
+  if (musicWanted) {
+    audio.play().catch(() => {});
+    fadeTo(VOLUME, 900);
+  } else {
+    fadeTo(0, 450);
+    setTimeout(() => {
+      if (!musicWanted) audio.pause();
+    }, 470);
+  }
+}
+
+soundBtn?.addEventListener("click", toggleSound);
+
+/* Onglet en arrière-plan → pause ; retour sur l'onglet → reprise.
+   On s'appuie sur `musicWanted` et non sur `audio.paused` : après une pause
+   automatique l'audio est en pause, ce qui empêcherait toute reprise. */
+document.addEventListener("visibilitychange", () => {
+  if (!hasMusic || !musicWanted) return;
+
+  if (document.hidden) {
+    cancelAnimationFrame(fadeRaf);
+    audio.pause();
+  } else {
+    audio.play().then(() => fadeTo(VOLUME, 700)).catch(() => {});
+  }
+});
+
+// Certains navigateurs mobiles (iOS Safari) n'émettent pas visibilitychange
+// au retour d'application : pageshow / focus servent de filet de sécurité.
+["pageshow", "focus"].forEach((ev) =>
+  window.addEventListener(ev, () => {
+    if (hasMusic && musicWanted && audio.paused && !document.hidden) {
+      audio.play().then(() => fadeTo(VOLUME, 700)).catch(() => {});
+    }
+  })
+);
+
+/* ============================================================
+   3. INTRO — OUVERTURE DE L'ENVELOPPE
    ============================================================ */
 
 const intro    = $("#intro");
@@ -115,7 +219,10 @@ function openEnvelope() {
   if (introDone) return;
   introDone = true;
 
-  // 1. retour tactile : l'enveloppe s'enfonce légèrement
+  // 1. la musique démarre sur le geste de l'utilisateur
+  startMusic();
+
+  // 2. retour tactile : l'enveloppe s'enfonce légèrement
   envelope.classList.add("is-pressed");
 
   setTimeout(() => {
@@ -157,7 +264,7 @@ envelope.addEventListener("keydown", (e) => {
 );
 
 /* ============================================================
-   3. COMPTE À REBOURS
+   4. COMPTE À REBOURS
    ============================================================ */
 
 (function initCountdown() {
@@ -197,7 +304,7 @@ envelope.addEventListener("keydown", (e) => {
 })();
 
 /* ============================================================
-   4. RÉVÉLATIONS AU SCROLL
+   5. RÉVÉLATIONS AU SCROLL
    ============================================================ */
 
 (function initReveal() {
@@ -215,7 +322,7 @@ envelope.addEventListener("keydown", (e) => {
 })();
 
 /* ============================================================
-   5. PARALLAXE LISSÉE DE LA CARTE (lerp + rAF)
+   6. PARALLAXE LISSÉE DE LA CARTE (lerp + rAF)
    ============================================================ */
 
 (function initParallax() {
@@ -248,7 +355,7 @@ envelope.addEventListener("keydown", (e) => {
 })();
 
 /* ============================================================
-   6. PARTICULES DORÉES (canvas, delta-time, pause hors écran)
+   7. PARTICULES DORÉES (canvas, delta-time, pause hors écran)
    ============================================================ */
 
 (function initParticles() {

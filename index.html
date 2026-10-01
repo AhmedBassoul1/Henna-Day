@@ -21,6 +21,22 @@
   <!-- Particules dorées -->
   <canvas id="particles" aria-hidden="true"></canvas>
 
+  <!-- Musique d'ambiance : démarre à l'ouverture de l'enveloppe -->
+  <audio id="music" loop preload="auto" playsinline></audio>
+
+  <!-- Contrôle du son -->
+  <button type="button" class="sound-toggle" id="soundToggle" hidden
+          aria-pressed="true" aria-label="Couper la musique" title="Couper la musique">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path class="spk" d="M4 9h3.5L12 5v14l-4.5-4H4z" />
+      <g class="waves">
+        <path d="M15.5 9.2a4 4 0 0 1 0 5.6" />
+        <path d="M18 6.8a7.5 7.5 0 0 1 0 10.4" />
+      </g>
+      <path class="cross" d="M16 9.5l5 5M21 9.5l-5 5" />
+    </svg>
+  </button>
+
   <!-- ====================== INTRO : ENVELOPPE ====================== -->
   <div class="intro" id="intro">
     <div class="petals" aria-hidden="true">
