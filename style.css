@@ -598,10 +598,11 @@ img, svg { display: block; max-width: 100%; }
   gap: .02em;
   margin: 1rem 0 0;
   font-family: var(--f-names);
-  font-size: clamp(2.4rem, 11.5vw, 3.2rem);
+  font-size: clamp(1.9rem, 9.5vw, 3rem);
   font-weight: 600;
   letter-spacing: .01em;
-  line-height: 1.05;
+  line-height: 1.08;
+  text-wrap: balance;
   color: var(--olive);
   text-shadow: 0 1px 0 rgba(255, 253, 248, .9);
 }

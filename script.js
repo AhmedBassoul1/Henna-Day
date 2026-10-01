@@ -42,7 +42,10 @@ const text = {
   "#envNames":       `${brideName} & ${groomName}`,
   "#envCardNames":   `${brideName} & ${groomName}`,
   "#envCardDate":    weddingDateLabel,
-  "#footerInitials": `${brideName.charAt(0)} & ${groomName.charAt(0)}`,
+  "#footerInitials":
+    typeof monogram === "string" && monogram.trim()
+      ? monogram
+      : `${brideName.charAt(0)} & ${groomName.charAt(0)}`,
 };
 for (const [sel, value] of Object.entries(text)) {
   const el = $(sel);

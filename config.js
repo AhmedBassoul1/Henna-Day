@@ -17,6 +17,9 @@ const eventTitle = "Henna Day"; // Titre doré de la carte
 // photo-transparent.png = photo.png détourée (fond gris retiré)
 const coupleImage = "photo/photo-transparent.png";
 const eventSubtitle = "Soirée de Henné";
+
+// Monogramme / signature (bas de page + PDF) — indépendant des prénoms affichés
+const monogram = "S & A";
 const eventTimeLabel = "16H00";
 const basmala = "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ";
 const invitationNote =
