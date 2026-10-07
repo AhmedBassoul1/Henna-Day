@@ -775,6 +775,8 @@ img, svg { display: block; max-width: 100%; }
   text-align: center;
 }
 
+.countup[hidden] { display: none; }
+
 .reveal {
   opacity: 0;
   transform: translate3d(0, 34px, 0);

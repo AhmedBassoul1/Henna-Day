@@ -42,6 +42,7 @@ const monogram  = "S & A";            // signature du pied de page ("" → initi
 const eventTitle     = "Henna Day";
 const eventSubtitle  = "Soirée de Henné";
 const weddingDate    = "2026-10-17T16:00:00";  // ISO , alimente le compte à rebours
+const datedemariage = "2026-10-24T20:00:00"; // ISO , compteur "Mariés depuis" ("" pour masquer)
 const weddingDateLabel = "17 Octobre 2026";
 const eventTimeLabel = "16H00";
 const weddingLocation = "gzenaya, Tanger";

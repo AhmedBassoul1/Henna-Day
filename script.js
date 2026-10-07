@@ -268,38 +268,50 @@ envelope.addEventListener("keydown", (e) => {
    ============================================================ */
 
 (function initCountdown() {
-  const target = new Date(weddingDate).getTime();
-  const nums = [...$$(".cd__num")];
-  const prev = {};
+  const down = { target: new Date(weddingDate).getTime(), dir: -1, sel: "[data-unit]", key: "unit" };
+  const up = typeof datedemariage === "string" && datedemariage
+    ? { target: new Date(datedemariage).getTime(), dir: 1, sel: "[data-up]", key: "up" }
+    : null;
 
-  function update() {
-    const diff = Math.max(0, target - Date.now());
-    const map = {
-      days:    Math.floor(diff / 86400000),
-      hours:   Math.floor((diff % 86400000) / 3600000),
-      minutes: Math.floor((diff % 3600000) / 60000),
-      seconds: Math.floor((diff % 60000) / 1000),
-    };
+  const section = $("#countupSection");
+  if (up && !isNaN(up.target) && section) section.hidden = false;
 
-    for (const el of nums) {
-      const unit = el.dataset.unit;
-      const v = String(map[unit]).padStart(2, "0");
-      if (prev[unit] === v) continue;
-      prev[unit] = v;
-      el.textContent = v;
-      if (!reduceMotion) {
-        el.classList.remove("tick");
-        void el.offsetWidth; // reflow → relance l'animation
-        el.classList.add("tick");
+  const makeTicker = ({ target, dir, sel, key }) => {
+    const nums = [...$$(sel)];
+    const prev = {};
+    return function update() {
+      const diff = Math.max(0, dir * (Date.now() - target));
+      const map = {
+        days:    Math.floor(diff / 86400000),
+        hours:   Math.floor((diff % 86400000) / 3600000),
+        minutes: Math.floor((diff % 3600000) / 60000),
+        seconds: Math.floor((diff % 60000) / 1000),
+      };
+
+      for (const el of nums) {
+        const unit = el.dataset[key];
+        const v = String(map[unit]).padStart(2, "0");
+        if (prev[unit] === v) continue;
+        prev[unit] = v;
+        el.textContent = v;
+        if (!reduceMotion) {
+          el.classList.remove("tick");
+          void el.offsetWidth; // reflow → relance l'animation
+          el.classList.add("tick");
+        }
       }
-    }
-  }
+    };
+  };
 
-  update();
+  const tickers = [makeTicker(down)];
+  if (up && !isNaN(up.target)) tickers.push(makeTicker(up));
+  const updateAll = () => tickers.forEach((t) => t());
+
+  updateAll();
   // Synchronisé sur la seconde pleine → pas de saut visuel
   setTimeout(() => {
-    update();
-    setInterval(update, 1000);
+    updateAll();
+    setInterval(updateAll, 1000);
   }, 1000 - (Date.now() % 1000));
 })();
 
