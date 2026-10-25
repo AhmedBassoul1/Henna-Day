@@ -15,7 +15,7 @@ const eventTitle = "Henna Day"; // Titre doré de la carte
 const eventSubtitle = "Soirée de Henné";
 
 const weddingDate = ""; // Format ISO , sert au compte à rebours
-const datedemariage =  "2026-10-24T10:00:00" // "2026-10-07T20:00:00"; // Format ISO , sert au compteur "Mariés depuis" ("" pour masquer)
+const datedemariage =  "2026-10-24T10:56:23" // "2026-10-07T20:00:00"; // Format ISO , sert au compteur "Mariés depuis" ("" pour masquer)
 const weddingDateLabel = "17 Octobre 2026"; // Date affichée
 const eventTimeLabel = "16H00";
 const weddingLocation = "gzenaya, Tanger";
